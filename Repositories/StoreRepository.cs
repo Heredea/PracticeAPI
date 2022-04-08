@@ -71,7 +71,7 @@ namespace PracticeAPI.Repositories
                 {
                     result.OwnerName = store.OwnerName;
                 }
-                if(result.ActiveSince != store.ActiveSince)
+                if(store.ActiveSince.ToString() != null)
                 {
                     result.ActiveSince = store.ActiveSince;
                 }
