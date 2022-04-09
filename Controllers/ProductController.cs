@@ -37,6 +37,20 @@ namespace PracticeAPI.Controllers
             return Ok(_productManager.FilterByKey(key));
         }
 
+        [HttpGet]
+        [Route("storeByRatingAverageDESC")]
+        public IActionResult StoreByRatingAverageDESC()
+        {
+            return Ok(_productManager.StoreByRatingAverageDESC());
+        }
+
+        [HttpGet]
+        [Route("storeByRatingAverageASC")]
+        public IActionResult StoreByRatingAverageASC()
+        {
+            return Ok(_productManager.StoreByRatingAverageASC());
+        }
+
         [HttpPost]
         [Route("create")]
         public IActionResult Create([FromBody] Product product)

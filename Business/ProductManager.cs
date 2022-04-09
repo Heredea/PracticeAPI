@@ -14,6 +14,9 @@ namespace PracticeAPI.Business
         string DeleteProduct(Guid id);
         Product MostRecentProduct();
         List<Product> FilterByKey(string key);
+        List<Product> StoreByRatingAverageASC();
+        List<Product> StoreByRatingAverageDESC();
+
     }
 
     public class ProductManager : IProductManager
@@ -54,6 +57,16 @@ namespace PracticeAPI.Business
             Rating rating = new Rating { ProductId = productId, Value = ratingValue };
             _productRepository.CreateRating(rating);
             return rating;
+        }
+
+        public List<Product> StoreByRatingAverageASC()
+        {
+            return _productRepository.StoreByRatingAverageASC();
+        }
+
+        public List<Product> StoreByRatingAverageDESC()
+        {
+            return _productRepository.StoreByRatingAverageDESC();
         }
 
         public Product UpdateProduct(Guid id, Product product)

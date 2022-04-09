@@ -16,6 +16,8 @@ namespace PracticeAPI.Repositories
         string DeleteProduct(Guid id);
         Product MostRecentProduct();
         List<Product> FilterByKey(string key);
+        List<Product> StoreByRatingAverageASC();
+        List<Product> StoreByRatingAverageDESC();
 
     }
     public class ProductRepository : IProductRepository
@@ -95,5 +97,38 @@ namespace PracticeAPI.Repositories
             return _context.Products.Where(s => s.Name.Contains(key)).ToList();
         }
 
+        public List<Product> StoreByRatingAverageASC()
+        {
+            var result = _context.Products.ToList();
+
+            result.OrderBy(o => RatingAverage(o.Ratings));
+
+            return result;
+        }
+
+        public List<Product> StoreByRatingAverageDESC()
+        {
+            var result = _context.Products.ToList();
+
+            result.OrderBy(o => RatingAverage(o.Ratings));
+
+            result.Reverse();
+
+            return result;
+        }
+
+        public int RatingAverage(ICollection<Rating> rating)
+        {
+            int sum = 0;
+            int i = 1;
+
+            foreach(var item in rating)
+            {
+                sum = +item.Value;
+                i++;
+            }
+
+            return sum;
+        }
     }
 }
